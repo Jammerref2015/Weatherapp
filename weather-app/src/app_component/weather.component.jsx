@@ -1,31 +1,38 @@
 import React from 'react';
 
+
 const Weather = (props) => {
     return (
-        <div className="container">
-            <div className="cards">
-                <h1>{props.city}, {props.country}</h1>
+        <div className="container text-light">
+            <div className="cards pt-4">
+                <h1 className="text-white py-3">
+                    {props.cityname}
+                </h1>
                 <h5 className="py-4">
-                    <i className="wi wi-day-sunny display-1" />
+                    <i className={`wi ${props.weatherIcon} display-1`} />
                 </h5>
-                <h1 className="py-2">25&deg;</h1>
-
+                {props.temp_celsius ? (
+                    <h1 className="py-2">{props.temp_celsius}&deg;</h1>
+                ): null }
                 {/** Show min and max temp here */}
-                {minmaxTemp(24,19)}
+                
+                {maxminTemp(props.temp_min, props.temp_max)}
 
-                <h4 className="py-3">Slow Rain</h4>
+                <h4 className="py-3">{props.description}</h4>
             </div>
         </div>
     );
 };
 
-function minmaxTemp(min, max) {
-    return (
-        <h3>
+function maxminTemp(min, max) {
+    if(max && min) {
+        return (
+            <h3>
             <span className="px-4">{min}&deg;</span>
             <span className="px-4">{max}&deg;</span>
         </h3>
-    )
+        );
+    }
 }
 
 export default Weather;
